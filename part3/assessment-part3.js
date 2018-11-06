@@ -12,7 +12,10 @@
 // with the animal as the context, and 'Trogdor' as a parameter.
 // return the result of your updateAnimal invocation
 
-// CODE HERE...
+const callBinding = (magicAnimals, updateAnimal, id) => {
+    let animal = magicAnimals.filter(animal => animal.id === id);
+    return updateAnimal.animal('Trogdor');
+}
 
 
 
@@ -27,7 +30,11 @@
 // with the context of the animal, and the array ['being majestic', 'eating rainbows'] as a parameter.
 // return the result of your updateAnimal invocation
 
-// CODE HERE...
+const applyBinding = (magicAnimals, updateAnimal, id) => {
+    let animal = magicAnimals.filter(animal => animal.id === id);
+
+    return updateAnimal(['being majestic', 'eating rainbows']);
+}
 
 
 

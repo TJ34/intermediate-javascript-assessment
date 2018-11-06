@@ -43,7 +43,13 @@ function noWeakLink() {
     method: 'GET',
     url: '/api/users'
   })
-  // CODE HERE...
+  .then(response => {
+    firstUser = response.data[0];
+    return response;
+  }).then(response => {
+    thirdUser = response.data[2];
+    return response.data[9];
+  })
 
 }
 
@@ -73,7 +79,7 @@ function large() {
 
   return 'My name is ' + this.name + ' and I am very heavy!'
 }
-// CODE HERE...
+var boundToElephant = large.bind(elephant);
 
 
 
@@ -89,7 +95,9 @@ function large() {
 
 // CODE HERE...
 
-
+const deathStar = (capacity, crew) => {
+  return capacity.bind(crew);
+}
 
 // *************
 // * PROBLEM 4 *
@@ -102,7 +110,11 @@ function large() {
 // The closure function will take in a parameter: liabilities (Number)
 // The closure function will return the combined value of assets and liabilities.
 
-// CODE HERE...
+const accountingOffice = (assets) => {
+  return function(liabilities){
+    return assets + liabilities;
+  }
+}
 
 
 
@@ -127,7 +139,17 @@ function large() {
 //     remember: << array of items to be remembered >>
 // };
 
-// CODE HERE...
+const forgetter = (name) => {
+  let items = [];
+
+  return function rememberall(item){
+    items.push(item);
+    return {
+      name: name,
+      remember: items
+    }
+  }
+}
 
 
 
@@ -155,4 +177,40 @@ function large() {
 
 // NOTE: Neither hunger nor danger should be able to exceed 100 or drop below 0.
 
-// CODE HERE...
+const frodo = (startingHungerValue, startingDangerValue) => {
+  let hunger = startingHungerValue;
+  let danger = startingDangerValue;
+
+  
+
+  return {
+    dinnerOverFire: function(){
+      hunger = hunger -= 25;
+      danger = danger += 40;
+
+      if(hunger>100){hunger=100};
+      if(hunger<0){hunger=0};
+      if(danger>100){danger=100};
+      if(danger<0){danger=0};
+
+      return {
+        hunger: hunger,
+        danger: danger
+      }
+    },
+    hidingInBush: function(){
+      hunger = hunger += 35;
+      danger = danger -= 20;
+
+      if(hunger>100){hunger=100};
+      if(hunger<0){hunger=0};
+      if(danger>100){danger=100};
+      if(danger<0){danger=0};
+
+      return {
+        hunger: hunger,
+        danger: danger
+      }
+    }
+  }
+}
